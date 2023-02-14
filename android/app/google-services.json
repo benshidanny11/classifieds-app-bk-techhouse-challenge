@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1003131946418",
+    "project_id": "classfied-bk-tech-house",
+    "storage_bucket": "classfied-bk-tech-house.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003131946418:android:dae67e43d61b4a424d50ab",
+        "android_client_info": {
+          "package_name": "com.example.classfiedapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003131946418-sldh9sucfe6c064v2b259rd99urqv9l1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.classfiedapp",
+            "certificate_hash": "5e0f46856ccfe88ec78fc50cca39150683265b71"
+          }
+        },
+        {
+          "client_id": "1003131946418-6gl718ts1va8lvj64lfqhg71ebhkriqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-8SZ7xshFE5lEMw6LrLjW6Ww1lEG92q0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003131946418-22s5at49kckmch0ru09lv1dmvve5smil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

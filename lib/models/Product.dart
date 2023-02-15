@@ -8,9 +8,12 @@ class Product {
   DateTime manufacturingDate;
   String ownerId;
   String category;
+  String productId;
 
   Product(
-      {required this.name,
+      {
+        required this.productId,
+        required this.name,
       required this.image,
       required this.category,
       required this.description,
@@ -20,6 +23,7 @@ class Product {
 
   Map<String, dynamic> toJson() {
     return {
+      'productId':productId,
       'name': name,
       'image': image,
       'description': description,
@@ -30,14 +34,15 @@ class Product {
     };
   }
 
-  Product fromJSon(json) {
+ static Product fromJSon(json) {
     return Product(
+      productId: json['productId'],
         name: json['name'],
         image: json['image'],
         category: json['category'],
         description: json['description'],
         ownerId: json['ownerId'],
         price: json['price'],
-        manufacturingDate: json['manufacturingDate']);
+        manufacturingDate: json['manufacturingDate'].toDate());
   }
 }

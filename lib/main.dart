@@ -1,8 +1,11 @@
 import 'package:classfiedapp/screens/Home.dart';
+import 'package:classfiedapp/screens/add_product.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -15,9 +18,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Classfied app',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Color(0xFFEB612A),
       ),
       home: const Home(),
+        routes:{
+          Home.id:(context) =>const Home(),
+          ProductForm.id:(context) => const ProductForm()
+        },
     );
   }
 }

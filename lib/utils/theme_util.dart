@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-
-class ThemeHelper {
+class ThemeUtil {
   InputDecoration textInputDecoration(
-      [String lableText = "", String hintText = ""]) {
+      [String lableText = "", String hintText = "", Icon? sufixIcon]) {
     return InputDecoration(
       labelText: lableText,
       hintText: hintText,
@@ -24,6 +23,7 @@ class ThemeHelper {
           borderRadius: BorderRadius.circular(10.0),
           borderSide: const BorderSide(color: Colors.red, width: 2.0)),
     );
+    
   }
 
   BoxDecoration inputBoxDecorationShaddow() {
@@ -48,8 +48,8 @@ class ThemeHelper {
     }
 
     return BoxDecoration(
-      boxShadow:const [
-         BoxShadow(color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
+      boxShadow: const [
+        BoxShadow(color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
       ],
       gradient: LinearGradient(
         begin: Alignment.topLeft,
@@ -69,12 +69,35 @@ class ThemeHelper {
     return ButtonStyle(
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(10.0),
         ),
       ),
       minimumSize: MaterialStateProperty.all(const Size(50, 50)),
-      backgroundColor: MaterialStateProperty.all(Colors.transparent),
-      shadowColor: MaterialStateProperty.all(Colors.transparent),
+      backgroundColor: MaterialStateProperty.all(const Color(0xFFEB612A)),
+      shadowColor: MaterialStateProperty.all(const Color.fromARGB(255, 189, 60, 9)),
+    );
+  }
+
+   InputDecoration dropDownDecoration(
+      [String lableText = "", String hintText = ""]) {
+    return InputDecoration(
+      labelText: lableText,
+      hintText: hintText,
+      fillColor: Colors.white,
+      filled: true,
+      contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Colors.grey)),
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.grey.shade400)),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: const BorderSide(color: Colors.red, width: 2.0)),
+      focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: const BorderSide(color: Colors.red, width: 2.0)),
     );
   }
 
@@ -97,6 +120,12 @@ class ThemeHelper {
       ],
     );
   }
+
+TextStyle bodyTextStyle() =>
+    const TextStyle(color: Color.fromARGB(136, 105, 105, 105));
+
+TextStyle appBarTitleStyle() => const TextStyle(color: Colors.white);
+
 }
 
-TextStyle bodyTextStyle() => const TextStyle(color: Color.fromARGB(136, 105, 105, 105));
+

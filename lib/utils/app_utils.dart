@@ -13,10 +13,10 @@ class AppUtil {
       required String category,
       required String description,
       required double price,
-      required DateTime manufacturingDate,required
-      String imgFilePath}) async {
+      required DateTime? manufacturingDate,required
+      String? imgFilePath}) async {
     var snapshot =
-        await FirebaseUtil().getStorageInstance().putFile(File(imgFilePath));
+        await FirebaseUtil().getStorageInstance().child(const Uuid().v4()).putFile(File(imgFilePath!));
     var productImage = await snapshot.ref.getDownloadURL();
     Product product = Product(
         productId: const Uuid().v4(),
@@ -26,7 +26,7 @@ class AppUtil {
         description: description,
         ownerId: AuthService.getCurrentUser()!.uid,
         price: price,
-        manufacturingDate: manufacturingDate);
+        manufacturingDate: manufacturingDate!);
     await FirebaseUtil().getProductsCollectionReference().add(product.toJson());
   }
 }

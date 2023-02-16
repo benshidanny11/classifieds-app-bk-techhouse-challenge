@@ -87,6 +87,14 @@ class _ProductDatailsState extends State<ProductDatails> {
                       style: ThemeUtil().customTextStyle(
                           const Color(0xFF010035), 18, FontWeight.w300),
                     ),
+                    Text(
+                      product.category,
+                      style: ThemeUtil().customTextStyle(
+                          const Color(0xFF010035), 18, FontWeight.w300),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     const SizedBox(
                       height: 5,
                     ),

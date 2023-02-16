@@ -5,6 +5,7 @@ import 'package:classfiedapp/widgets/img_loading_indicatior.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:intl/intl.dart';
 
 import '../models/Product.dart';
 
@@ -14,6 +15,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final dateFormat = DateFormat('dd-MM-yyyy');
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, ProductDatails.id,
@@ -37,19 +39,34 @@ class ProductItem extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 5),
-            Text(
-              product.name,
-              style: ThemeUtil().customTextStyle(
-                const Color.fromRGBO(1, 0, 53, 1),
-                16,
-                FontWeight.w700,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  product.name,
+                  style: ThemeUtil().customTextStyle(
+                    const Color.fromRGBO(1, 0, 53, 1),
+                    16,
+                    FontWeight.w700,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                 Text(
+                  dateFormat.format(product.manufacturingDate),
+                  style: ThemeUtil().customTextStyle(
+                     const Color.fromRGBO(1, 0, 53, 1),
+                    13,
+                    FontWeight.w400,
+                  ),
+                ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'RWF ${product.price}',
+                  '${product.price} RWF',
                   style: ThemeUtil().customTextStyle(
                     Theme.of(context).primaryColor,
                     13,

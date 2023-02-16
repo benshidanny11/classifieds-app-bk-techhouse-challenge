@@ -53,31 +53,33 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: FutureBuilder<dynamic>(
-          future: _future,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                  child: CircularProgressIndicator(
-                color: Theme.of(context).primaryColor,
-              ));
-            }
-
-            List<Product> products = snapshot.data;
-
-            return products.isEmpty
-                ? const Center(child: Text('No data found'))
-                : StaggeredGrid.count(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 2,
-                    mainAxisSpacing: 2,
-                    axisDirection: AxisDirection.down,
-                    children: products
-                        .map((product) => ProductItem(
-                              product: product,
-                            ))
-                        .toList());
-          },
+        child: SingleChildScrollView(
+          child: FutureBuilder<dynamic>(
+            future: _future,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: Theme.of(context).primaryColor,
+                ));
+              }
+        
+              List<Product> products = snapshot.data;
+        
+              return products.isEmpty
+                  ? const Center(child: Text('No data found'))
+                  : StaggeredGrid.count(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 2,
+                      mainAxisSpacing: 2,
+                      axisDirection: AxisDirection.down,
+                      children: products
+                          .map((product) => ProductItem(
+                                product: product,
+                              ))
+                          .toList());
+            },
+          ),
         ),
       ),
       floatingActionButton: AuthService.getCurrentUser() != null

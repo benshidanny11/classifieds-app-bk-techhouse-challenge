@@ -45,6 +45,7 @@ class _ProductFormState extends State<ProductForm> {
   void initState() {
     _manufacturingDateController.text =
         DateFormat('dd-MM-yyyy').format(DateTime.now());
+    manufactureDate = DateTime.now();
     super.initState();
   }
 
@@ -122,8 +123,8 @@ class _ProductFormState extends State<ProductForm> {
                                   DateTime? pickedDate = await showDatePicker(
                                       context: context,
                                       initialDate: DateTime.now(),
-                                      firstDate: DateTime(2000),
-                                      lastDate: DateTime(2101));
+                                      firstDate: DateTime(1923),
+                                      lastDate: DateTime.now());
 
                                   if (pickedDate != null) {
                                     manufactureDate = pickedDate;
@@ -142,11 +143,12 @@ class _ProductFormState extends State<ProductForm> {
                               const SizedBox(
                                 height: 15,
                               ),
-                              ImagePickerWidget(image: image, onTap: ()  async {
-                                 image = await ImageUtil.picImage();
-                                        setState(() {
-                                        });
-                              }),
+                              ImagePickerWidget(
+                                  image: image,
+                                  onTap: () async {
+                                    image = await ImageUtil.picImage();
+                                    setState(() {});
+                                  }),
 
                               // Row(
                               //   mainAxisAlignment:
@@ -178,7 +180,7 @@ class _ProductFormState extends State<ProductForm> {
                               //                 Theme.of(context).primaryColor))
                               //   ],
                               // ),
-                             
+
                               const SizedBox(
                                 height: 30,
                               ),
@@ -203,7 +205,7 @@ class _ProductFormState extends State<ProductForm> {
                                                 description:
                                                     _descriptionController.text,
                                                 manufacturingDate:
-                                                    manufactureDate!,
+                                                    manufactureDate,
                                                 imgFilePath: image!.path,
                                                 price: double.parse(
                                                     _priceController.text));
@@ -218,6 +220,7 @@ class _ProductFormState extends State<ProductForm> {
                                             });
                                             // ToastUtil.showErrorToast(
                                             //     "Product is added successfully");
+                                            print("Errorrrr=====>");
                                             print(e);
                                           }
                                         }

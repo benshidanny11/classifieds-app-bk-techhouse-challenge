@@ -1,5 +1,6 @@
 import 'package:classfiedapp/screens/home.dart';
 import 'package:classfiedapp/screens/add_product.dart';
+import 'package:classfiedapp/screens/my_products.dart';
 import 'package:classfiedapp/screens/product_details.dart';
 import 'package:classfiedapp/screens/welcome.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
           Home.id:(context) =>const Home(),
           ProductForm.id:(context) => const ProductForm(),
           Welcome.id:(context) => const Welcome(),
-          ProductDatails.id:(context) => const ProductDatails()
+          ProductDatails.id:(context) => const ProductDatails(),
+          MyProducts.id:(context) => const MyProducts()
         },
     );
   }

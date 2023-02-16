@@ -7,15 +7,16 @@ import 'package:classfiedapp/utils/firebase_util.dart';
 import 'package:classfiedapp/utils/image_util.dart';
 import 'package:classfiedapp/utils/size_utils.dart';
 import 'package:classfiedapp/utils/toast_util.dart';
-import 'package:classfiedapp/widgets/DropdownWidget.dart';
+import 'package:classfiedapp/widgets/button_text_widget.dart';
+import 'package:classfiedapp/widgets/dropdown_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../utils/theme_util.dart';
-import '../widgets/InputWidget.dart';
+import '../widgets/input_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
-import 'Home.dart';
+import 'home.dart';
 
 class ProductForm extends StatefulWidget {
   static String id = '/productform';
@@ -169,20 +170,9 @@ class _ProductFormState extends State<ProductForm> {
                                   children: [
                                     ElevatedButton(
                                       style: ThemeUtil().buttonStyle(),
-                                      child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            40, 10, 40, 10),
-                                        child: loadingAddProduct
-                                            ? const CircularProgressIndicator(
-                                                color: Colors.white)
-                                            : Text(
-                                                "Add product".toUpperCase(),
-                                                style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
+                                      child: ButtonTextWidget(
+                                        label: "Add product",
+                                        loading: loadingAddProduct,
                                       ),
                                       onPressed: () async {
                                         if (_formKey.currentState!.validate()) {
@@ -197,7 +187,7 @@ class _ProductFormState extends State<ProductForm> {
                                                 .ref
                                                 .getDownloadURL();
                                             Product product = Product(
-                                              productId:const Uuid().v4(),
+                                                productId: const Uuid().v4(),
                                                 name: _nameController.text,
                                                 image: productImage,
                                                 category: selectedCategory,

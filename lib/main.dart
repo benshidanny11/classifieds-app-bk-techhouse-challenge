@@ -1,5 +1,6 @@
-import 'package:classfiedapp/screens/Home.dart';
+import 'package:classfiedapp/screens/home.dart';
 import 'package:classfiedapp/screens/add_product.dart';
+import 'package:classfiedapp/screens/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -20,10 +21,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFFEB612A),
       ),
-      home: const Home(),
+      home: const Welcome(),
         routes:{
           Home.id:(context) =>const Home(),
-          ProductForm.id:(context) => const ProductForm()
+          ProductForm.id:(context) => const ProductForm(),
+          Welcome.id:(context) => const Welcome()
         },
     );
   }

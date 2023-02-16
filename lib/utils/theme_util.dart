@@ -23,7 +23,6 @@ class ThemeUtil {
           borderRadius: BorderRadius.circular(10.0),
           borderSide: const BorderSide(color: Colors.red, width: 2.0)),
     );
-    
   }
 
   BoxDecoration inputBoxDecorationShaddow() {
@@ -74,11 +73,12 @@ class ThemeUtil {
       ),
       minimumSize: MaterialStateProperty.all(const Size(50, 50)),
       backgroundColor: MaterialStateProperty.all(const Color(0xFFEB612A)),
-      shadowColor: MaterialStateProperty.all(const Color.fromARGB(255, 189, 60, 9)),
+      shadowColor:
+          MaterialStateProperty.all(const Color.fromARGB(255, 189, 60, 9)),
     );
   }
 
-   InputDecoration dropDownDecoration(
+  InputDecoration dropDownDecoration(
       [String lableText = "", String hintText = ""]) {
     return InputDecoration(
       labelText: lableText,
@@ -121,11 +121,12 @@ class ThemeUtil {
     );
   }
 
-TextStyle bodyTextStyle() =>
-    const TextStyle(color: Color.fromARGB(136, 105, 105, 105));
+  TextStyle bodyTextStyle() =>
+      const TextStyle(color: Color.fromARGB(136, 105, 105, 105));
 
-TextStyle appBarTitleStyle() => const TextStyle(color: Colors.white);
+  TextStyle appBarTitleStyle() => const TextStyle(color: Colors.white);
 
+  TextStyle customTextStyle(Color color, double fontSize, FontWeight fontWeight) {
+    return TextStyle(color: color, fontSize: fontSize, fontWeight: fontWeight);
+  }
 }
-
-

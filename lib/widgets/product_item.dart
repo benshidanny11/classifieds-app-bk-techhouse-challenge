@@ -1,4 +1,5 @@
 import 'package:classfiedapp/screens/product_details.dart';
+import 'package:classfiedapp/utils/share_util.dart';
 import 'package:classfiedapp/utils/theme_util.dart';
 import 'package:classfiedapp/widgets/img_loading_indicatior.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +17,12 @@ class ProductItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, ProductDatails.id,
-            arguments: {'id': product.productId});
+            arguments: {'product': product});
       },
       child: Container(
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10)),
+            color: Colors.white, borderRadius: BorderRadius.circular(10)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -50,15 +50,20 @@ class ProductItem extends StatelessWidget {
               children: [
                 Text(
                   'RWF ${product.price}',
-                   style: ThemeUtil().customTextStyle(
+                  style: ThemeUtil().customTextStyle(
                     Theme.of(context).primaryColor,
                     13,
                     FontWeight.w400,
                   ),
                 ),
-                IconButton(onPressed: (){
-
-                }, icon: Icon(Icons.share, color: Theme.of(context).primaryColor,))
+                IconButton(
+                    onPressed: () {
+                      shareProduct(product);
+                    },
+                    icon: Icon(
+                      Icons.share,
+                      color: Theme.of(context).primaryColor,
+                    ))
               ],
             ),
           ],

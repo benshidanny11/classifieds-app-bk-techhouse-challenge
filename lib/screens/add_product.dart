@@ -2,13 +2,16 @@
 
 import 'dart:io';
 import 'package:classfiedapp/models/Product.dart';
+import 'package:classfiedapp/utils/app_utils.dart';
 import 'package:classfiedapp/utils/data_utils.dart';
 import 'package:classfiedapp/utils/firebase_util.dart';
 import 'package:classfiedapp/utils/image_util.dart';
 import 'package:classfiedapp/utils/size_utils.dart';
 import 'package:classfiedapp/utils/toast_util.dart';
 import 'package:classfiedapp/widgets/button_text_widget.dart';
+import 'package:classfiedapp/widgets/date_picker_input.dart';
 import 'package:classfiedapp/widgets/dropdown_widget.dart';
+import 'package:classfiedapp/widgets/image_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../utils/theme_util.dart';
@@ -39,6 +42,13 @@ class _ProductFormState extends State<ProductForm> {
   XFile? image;
 
   @override
+  void initState() {
+    _manufacturingDateController.text =
+        DateFormat('dd-MM-yyyy').format(DateTime.now());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -49,7 +59,7 @@ class _ProductFormState extends State<ProductForm> {
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 250, 242, 242),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -83,9 +93,11 @@ class _ProductFormState extends State<ProductForm> {
                                 height: 10,
                               ),
                               InputWidget(
-                                  controller: _priceController,
-                                  hint: "Product price",
-                                  label: "Enter product price"),
+                                controller: _priceController,
+                                hint: "Product price",
+                                label: "Enter product price",
+                                isNumber: true,
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
@@ -101,11 +113,10 @@ class _ProductFormState extends State<ProductForm> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              InputWidget(
+                              DatePickerInput(
                                 controller: _manufacturingDateController,
                                 hint: "Product manufacture date",
                                 label: "Enter manufacure date",
-                                isDatePicker: true,
                                 // isEnabled: false,
                                 onDatePickerClick: () async {
                                   DateTime? pickedDate = await showDatePicker(
@@ -131,37 +142,43 @@ class _ProductFormState extends State<ProductForm> {
                               const SizedBox(
                                 height: 15,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  image == null
-                                      ? Image.asset(
-                                          'assets/images/iconproduct.png',
-                                          width: 60,
-                                          height: 60,
-                                          fit: BoxFit.fitWidth,
-                                        )
-                                      : Image.file(
-                                          File(
-                                            image!.path,
-                                          ),
-                                          width: 60,
-                                          height: 60,
-                                          fit: BoxFit.fitWidth,
-                                        ),
-                                  IconButton(
-                                      onPressed: (() async {
-                                        image = await ImageUtil.picImage();
+                              ImagePickerWidget(image: image, onTap: ()  async {
+                                 image = await ImageUtil.picImage();
                                         setState(() {
-                                          //update UI
                                         });
-                                      }),
-                                      icon: Icon(Icons.add_a_photo,
-                                          color:
-                                              Theme.of(context).primaryColor))
-                                ],
-                              ),
+                              }),
+
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     image == null
+                              //         ? Image.asset(
+                              //             'assets/images/iconproduct.png',
+                              //             width: 60,
+                              //             height: 60,
+                              //             fit: BoxFit.fitWidth,
+                              //           )
+                              //         : Image.file(
+                              //             File(
+                              //               image!.path,
+                              //             ),
+                              //             width: 60,
+                              //             height: 60,
+                              //             fit: BoxFit.fitWidth,
+                              //           ),
+                              //     IconButton(
+                              //         onPressed: (() async {
+                              //           image = await ImageUtil.picImage();
+                              //           setState(() {
+                              //           });
+                              //         }),
+                              //         icon: Icon(Icons.add_a_photo,
+                              //             color:
+                              //                 Theme.of(context).primaryColor))
+                              //   ],
+                              // ),
+                             
                               const SizedBox(
                                 height: 30,
                               ),
@@ -180,30 +197,16 @@ class _ProductFormState extends State<ProductForm> {
                                             setState(() {
                                               loadingAddProduct = true;
                                             });
-                                            var snapshot = await FirebaseUtil()
-                                                .getStorageInstance()
-                                                .putFile(File(image!.path));
-                                            var productImage = await snapshot
-                                                .ref
-                                                .getDownloadURL();
-                                            Product product = Product(
-                                                productId: const Uuid().v4(),
-                                                name: _nameController.text,
-                                                image: productImage,
+                                            await AppUtil.addProduct(
                                                 category: selectedCategory,
+                                                name: _nameController.text,
                                                 description:
                                                     _descriptionController.text,
-                                                ownerId: 'Benshidanny',
-                                                price: double.parse(
-                                                    _priceController.text),
                                                 manufacturingDate:
-                                                    manufactureDate!);
-
-                                            await FirebaseUtil()
-                                                .getProductsCollectionReference()
-                                                .add(product.toJson());
-                                            // ToastUtil.showSuccessToast(
-                                            //     "Product is added successfully");
+                                                    manufactureDate!,
+                                                imgFilePath: image!.path,
+                                                price: double.parse(
+                                                    _priceController.text));
                                             setState(() {
                                               loadingAddProduct = false;
                                             });

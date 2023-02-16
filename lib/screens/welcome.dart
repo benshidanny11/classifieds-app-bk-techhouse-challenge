@@ -27,6 +27,7 @@ class _WelcomeState extends State<Welcome> {
         if (prefs.getBool('DontShowSignupPage')!) {
           Navigator.pushReplacementNamed(context, Home.id);
         } else {
+          print(AuthService.getCurrentUser());
           if (AuthService.getCurrentUser() != null) {
             Navigator.pushReplacementNamed(context, Home.id);
           } else {
@@ -36,9 +37,13 @@ class _WelcomeState extends State<Welcome> {
           }
         }
       }).catchError((onError) {
-        setState(() {
-          waitingForAppSetup = false;
-        });
+        if (AuthService.getCurrentUser() != null) {
+          Navigator.pushReplacementNamed(context, Home.id);
+        } else {
+          setState(() {
+            waitingForAppSetup = false;
+          });
+        }
       });
     });
 
@@ -48,6 +53,7 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 242, 242),
       body: waitingForAppSetup
           ? Container()
           : Center(
@@ -90,10 +96,9 @@ class _WelcomeState extends State<Welcome> {
                   ),
                   TextButton(
                       onPressed: (() async {
-                        
                         showCustomAlertDialog(context, "Sign in",
                             "Don't show this again? By clicking yes, you won't see this page again",
-                            onNegativeButtonClick: () async{
+                            onNegativeButtonClick: () async {
                           final prefs = await getSharedPreferences();
                           prefs.setBool("DontShowSignupPage", false);
                           Navigator.pushReplacementNamed(context, Home.id);

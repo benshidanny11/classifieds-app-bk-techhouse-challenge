@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -11,6 +12,7 @@ class InputWidget extends StatelessWidget {
   bool isDatePicker;
   Function? onDatePickerClick;
   bool isEnabled;
+  bool isNumber;
   InputWidget(
       {super.key,
       required this.controller,
@@ -18,7 +20,8 @@ class InputWidget extends StatelessWidget {
       required this.label,
       this.isDatePicker = false,
       this.onDatePickerClick,
-      this.isEnabled=true});
+      this.isEnabled = true,
+      this.isNumber = false});
 
   @override
   Widget build(BuildContext context) {
@@ -30,26 +33,32 @@ class InputWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextFormField(
-                      decoration: ThemeUtil().textInputDecoration(label, hint),
-                      controller: controller,
-                      validator: (val) {
-                        if ((val!.isEmpty)) {
-                          return hint;
-                        }
-                      },
-                      keyboardAppearance: Brightness.light,
-                      enabled: isEnabled,
-                      ),
+                    decoration: ThemeUtil().textInputDecoration(label, hint),
+                    controller: controller,
+                    validator: (val) {
+                      if ((val!.isEmpty)) {
+                        return hint;
+                      }
+                    },
+                    keyboardAppearance: Brightness.light,
+                    enabled: isEnabled,
+                  ),
                 ),
                 IconButton(
                     onPressed: () {
                       onDatePickerClick!();
                     },
-                    icon:  Icon(Icons.date_range, color: Theme.of(context).primaryColor,))
+                    icon: Icon(
+                      Icons.date_range,
+                      color: Theme.of(context).primaryColor,
+                    ))
               ],
             )
           : TextFormField(
               decoration: ThemeUtil().textInputDecoration(label, hint),
+               inputFormatters: [isNumber?FilteringTextInputFormatter.digitsOnly:FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'))],
+                    keyboardType:
+                        isNumber ? TextInputType.number : TextInputType.text,
               controller: controller,
               validator: (val) {
                 if ((val!.isEmpty)) {

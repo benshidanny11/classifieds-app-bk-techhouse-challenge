@@ -16,7 +16,7 @@ List<Bubble> getFabItems(animationController, context) {
       icon: FontAwesomeIcons.basketShopping,
       titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
       onPress: () {
-        Navigator.pushReplacementNamed(context, ProductForm.id);
+        Navigator.pushNamed(context, ProductForm.id);
         animationController!.reverse();
       },
     ),

@@ -42,7 +42,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Color.fromARGB(255, 250, 242, 242),
+      backgroundColor:const Color.fromARGB(255, 250, 242, 242),
       appBar: AppBar(
         title: Text(
           'Classfied app',

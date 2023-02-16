@@ -25,6 +25,18 @@ class ThemeUtil {
     );
   }
 
+  InputDecoration dateInputDecoration(
+      [String lableText = "", String hintText = "", Icon? sufixIcon]) {
+    return InputDecoration(
+      labelText: lableText,
+      hintText: hintText,
+      fillColor: Colors.transparent,
+      filled: true,
+      border: InputBorder.none,
+      contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+    );
+  }
+
   BoxDecoration inputBoxDecorationShaddow() {
     return BoxDecoration(boxShadow: [
       BoxShadow(
@@ -33,6 +45,20 @@ class ThemeUtil {
         offset: const Offset(0, 5),
       )
     ]);
+  }
+
+  BoxDecoration inputDateBoxDecorationShaddow() {
+    return BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 5),
+          ),
+        ],
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey));
   }
 
   BoxDecoration buttonBoxDecoration(BuildContext context,
@@ -126,7 +152,8 @@ class ThemeUtil {
 
   TextStyle appBarTitleStyle() => const TextStyle(color: Colors.white);
 
-  TextStyle customTextStyle(Color color, double fontSize, FontWeight fontWeight) {
+  TextStyle customTextStyle(
+      Color color, double fontSize, FontWeight fontWeight) {
     return TextStyle(color: color, fontSize: fontSize, fontWeight: fontWeight);
   }
 }

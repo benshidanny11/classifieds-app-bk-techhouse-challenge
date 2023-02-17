@@ -22,13 +22,13 @@ class DatePickerInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: ThemeUtil().inputDateBoxDecorationShaddow(),
+      decoration: ThemeUtil().inputCustomBoxDecorationShaddow(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             child: TextFormField(
-              decoration: ThemeUtil().dateInputDecoration(label, hint),
+              decoration: ThemeUtil().customInputDecoration(label, hint),
               readOnly: true,
               controller: controller,
               validator: (val){

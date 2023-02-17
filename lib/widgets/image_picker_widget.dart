@@ -12,31 +12,47 @@ class ImagePickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
-      decoration: ThemeUtil().inputDateBoxDecorationShaddow(),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          image == null
-              ? Image.asset(
-                  'assets/images/iconproduct.png',
-                  width: 60,
-                  height: 60,
-                  fit: BoxFit.fitWidth,
-                )
-              : Image.file(
-                  File(
-                    image!.path,
-                  ),
-                  width: 60,
-                  height: 60,
-                  fit: BoxFit.fitWidth,
-                ),
-          IconButton(
-              onPressed:onTap,
-              icon:
-                  Icon(Icons.add_a_photo, color: Theme.of(context).primaryColor))
-        ],
+      padding: const EdgeInsets.all(10),
+      decoration: ThemeUtil().inputCustomBoxDecorationShaddow(),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Product image',
+              style: ThemeUtil()
+                  .customTextStyle(Color.fromARGB(116, 0, 0, 0), 13, FontWeight.w400),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                image == null
+                    ? Image.asset(
+                        'assets/images/iconproduct.png',
+                        width: 60,
+                        height: 60,
+                        fit: BoxFit.fitWidth,
+                      )
+                    : Image.file(
+                        File(
+                          image!.path,
+                        ),
+                        width: 60,
+                        height: 60,
+                        fit: BoxFit.fitWidth,
+                      ),
+                IconButton(
+                    onPressed: onTap,
+                    icon: Icon(Icons.add_a_photo,
+                        color: Theme.of(context).primaryColor))
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

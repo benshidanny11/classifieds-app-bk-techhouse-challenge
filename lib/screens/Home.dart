@@ -42,14 +42,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color.fromARGB(255, 250, 242, 242),
+      backgroundColor: const Color.fromARGB(255, 250, 242, 242),
       appBar: AppBar(
         title: Text(
-          'Classfied app',
+          'Classifieds App',
           style: ThemeUtil().appBarTitleStyle(),
         ),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
+        actions: [
+          IconButton(
+              onPressed: () {
+               setState(() {
+                  _future =  _service!.getProducts();
+               });
+              },
+              icon: Icon(Icons.refresh))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -63,9 +72,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   color: Theme.of(context).primaryColor,
                 ));
               }
-        
+
               List<Product> products = snapshot.data;
-        
+
               return products.isEmpty
                   ? const Center(child: Text('No data found'))
                   : StaggeredGrid.count(

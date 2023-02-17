@@ -66,16 +66,17 @@ class _ProductFormState extends State<ProductForm> {
           children: [
             Container(
               margin: const EdgeInsets.fromLTRB(25, 50, 25, 10),
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              // padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               alignment: Alignment.center,
-              child: Column(
-                children: [
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: getScreenHeight(context) * .78,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: getScreenHeight(context) * .78,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -89,7 +90,8 @@ class _ProductFormState extends State<ProductForm> {
                               InputWidget(
                                   controller: _descriptionController,
                                   hint: "Product description",
-                                  label: "Enter product description"),
+                                  label: "Enter product description",
+                                  isDescription: true,),
                               const SizedBox(
                                 height: 10,
                               ),
@@ -125,7 +127,7 @@ class _ProductFormState extends State<ProductForm> {
                                       initialDate: DateTime.now(),
                                       firstDate: DateTime(1923),
                                       lastDate: DateTime.now());
-
+                      
                                   if (pickedDate != null) {
                                     manufactureDate = pickedDate;
                                     String formattedDate =
@@ -149,7 +151,7 @@ class _ProductFormState extends State<ProductForm> {
                                     image = await ImageUtil.picImage();
                                     setState(() {});
                                   }),
-
+                      
                               // Row(
                               //   mainAxisAlignment:
                               //       MainAxisAlignment.spaceBetween,
@@ -180,7 +182,7 @@ class _ProductFormState extends State<ProductForm> {
                               //                 Theme.of(context).primaryColor))
                               //   ],
                               // ),
-
+                      
                               const SizedBox(
                                 height: 30,
                               ),
@@ -229,11 +231,11 @@ class _ProductFormState extends State<ProductForm> {
                                   ]),
                             ],
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ],

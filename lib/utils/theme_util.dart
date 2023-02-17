@@ -25,7 +25,7 @@ class ThemeUtil {
     );
   }
 
-  InputDecoration dateInputDecoration(
+  InputDecoration customInputDecoration(
       [String lableText = "", String hintText = "", Icon? sufixIcon]) {
     return InputDecoration(
       labelText: lableText,
@@ -47,7 +47,7 @@ class ThemeUtil {
     ]);
   }
 
-  BoxDecoration inputDateBoxDecorationShaddow() {
+  BoxDecoration inputCustomBoxDecorationShaddow() {
     return BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -101,29 +101,6 @@ class ThemeUtil {
       backgroundColor: MaterialStateProperty.all(const Color(0xFFEB612A)),
       shadowColor:
           MaterialStateProperty.all(const Color.fromARGB(255, 189, 60, 9)),
-    );
-  }
-
-  InputDecoration dropDownDecoration(
-      [String lableText = "", String hintText = ""]) {
-    return InputDecoration(
-      labelText: lableText,
-      hintText: hintText,
-      fillColor: Colors.white,
-      filled: true,
-      contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colors.grey)),
-      enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.grey.shade400)),
-      errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: const BorderSide(color: Colors.red, width: 2.0)),
-      focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: const BorderSide(color: Colors.red, width: 2.0)),
     );
   }
 

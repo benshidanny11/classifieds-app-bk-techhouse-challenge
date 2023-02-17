@@ -66,7 +66,7 @@ class _WelcomeState extends State<Welcome> {
                     height: 5,
                   ),
                   Text(
-                    'Classfied app',
+                    'Classifieds App',
                     style: ThemeUtil().customTextStyle(
                         Theme.of(context).primaryColor, 22, FontWeight.w700),
                   ),

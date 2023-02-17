@@ -29,8 +29,8 @@ class _MyProductItemState extends State<MyProductItem> {
             arguments: {'product': widget.product});
       }),
       child: Container(
-        height: 100,
-        margin: EdgeInsets.only(bottom: 10),
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.all(10),
         child: Card(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -43,6 +43,7 @@ class _MyProductItemState extends State<MyProductItem> {
                       widget.product.image,
                       fit: BoxFit.cover,
                       width: 100,
+                      height: 100,
                     ),
                     const SizedBox(
                       width: 10,
@@ -64,7 +65,7 @@ class _MyProductItemState extends State<MyProductItem> {
                           height: 10,
                         ),
                         Text(
-                          widget.product.price.toString(),
+                          '${widget.product.price.toString()} RWF',
                           style: ThemeUtil().customTextStyle(
                             const Color.fromRGBO(1, 0, 53, 1),
                             13,
@@ -72,10 +73,10 @@ class _MyProductItemState extends State<MyProductItem> {
                           ),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 1,
                         ),
                         Text(
-                          dateFormat.format(widget.product.manufacturingDate),
+                          'MFGDT: ${dateFormat.format(widget.product.manufacturingDate)}',
                           style: ThemeUtil().customTextStyle(
                             const Color.fromRGBO(1, 0, 53, 1),
                             13,
@@ -108,13 +109,12 @@ class _MyProductItemState extends State<MyProductItem> {
                     },
                     icon: loadingOnDelete
                         ? SizedBox(
-                          width: 25,
-                          height: 25,
-                          child: CircularProgressIndicator(
+                            width: 25,
+                            height: 25,
+                            child: CircularProgressIndicator(
                               color: Theme.of(context).primaryColor,
-                              
                             ),
-                        )
+                          )
                         : Icon(
                             Icons.delete,
                             color: Theme.of(context).primaryColor,

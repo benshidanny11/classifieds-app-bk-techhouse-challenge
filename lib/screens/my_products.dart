@@ -37,7 +37,7 @@ class _MyProductState extends State<MyProducts> {
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: FutureBuilder<dynamic>(
           future: _future,
           builder: (context, snapshot) {
